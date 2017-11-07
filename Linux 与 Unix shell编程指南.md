@@ -1,9 +1,9 @@
-#文件权限
-##更改权限
-###绝对模式
+# 文件权限
+## 更改权限
+### 绝对模式
 chmod  [mode] file
 mode 为八进制数，如chmod 741 file
-###符号模式
+### 符号模式
 chmod [who] operator [permission] filename
 who: u -> 文件owner；g->同组用户；o->其他用户；a->所有用户
 operator: +;-:=
@@ -24,12 +24,12 @@ chmod -R 644 *
 umask用来设置用户新建文件和文件夹的默认权限，但是设置的权限是求异的，
 例如执行umask 022的命令表示从默认的新建文件的权限666变为了644，新建目录的权限从777变为了755
 
-##更改owner或Group
+## 更改owner或Group
 格式：chown [-R] [-h] owner file
 chown dyllan file
 chgrp dyllan file
 
-#FIND
+# FIND
 命令：find pathname -options [-print -exec -ok]
 
 options:
@@ -46,8 +46,8 @@ options:
 find . -name '*.txt' -print
 find logs -types f -mtime +5 -exec rm {} \;
 
-#后台执行命令
-##crontab
+# 后台执行命令
+## crontab
 适合在特定的时间执行命令
 格式crontab [-u user] -e -l -r
 -u  用户名
@@ -75,14 +75,14 @@ Command &
 例如：find /etc -name "srm.conf" -print > find.dt 2> &1 &
 其中2> &1表示重定位错误到之前的写的文件流
 
-###查看进程：
+### 查看进程：
 ps x | grep [pid]
 
-##nohup
+## nohup
 nohup command &
 nohup find /etc -name "srm.conf" -print > find.dt 2> &
 
-#文件名置换
+# 文件名置换
 
 特殊字符：
 *匹配文件名中的任何字符串
@@ -90,8 +90,8 @@ nohup find /etc -name "srm.conf" -print > find.dt 2> &
 [...] 匹配[]中所包含的任何字符
 [!...] 匹配[]中非感叹号!之后的字符
 
-#shell输入于输出
-##echo
+# shell输入于输出
+## echo
 echo 后面跟-e后可以转义后面的输出，环境变量和command，例如
 ```bash
 echo -e "you home is $HOME, tty print `tty`, well\tdone"
@@ -101,7 +101,7 @@ output 就是
 ```bash
 you home is /home/dyllanluo, tty print /dev/pts/1, well	done
 ```
-##read
+## read
 可以从键盘或文件中的某一行读入信息，并赋值给某个变量。
 命令格式为：read variable1 variable2
 ```bash
@@ -110,7 +110,7 @@ Jone Doe
 dyllanluo@dyllanluo-PC:~$ echo $name
 Jone Doe
 ```
-##cat
+## cat
 cat file
 cat用来显示文件内容，因为cat会显示所有内容，可以通过管道命令，传递到另外一个具有分页功能的命令中：
 cat file | more
@@ -118,11 +118,11 @@ cat file | more
 合并文件内容可以：
 cat file1 file2 file3 > bigfile
 
-##tee
+## tee
 把输出的一个副本输送到标准输出，另一个副本拷贝到相应的文件中。
 tee -a files
 -a 表示追加到文件末尾
-##标准输入输出和错误
+## 标准输入输出和错误
 1. 输入文件-标准输入	0
 2. 输出文件-标准输出	1
 3. 错误输出文件-错误	2
@@ -168,25 +168,25 @@ command命令以filename文件作为标准输入
 13. command < &-
 关闭标准输入
 
-#命令执行顺序
-##使用&&
+# 命令执行顺序
+## 使用&&
 命令格式： command1 && command2
 当command1顺利执行（返回0）后，才会执行command2
 例如：
 mv ./test/log.txt ./log/log.txt && rm ./test/log.txt
-##使用||
+## 使用||
 命令格式：command1 || command2
 当command1顺利执行时，command2不会执行。反之，执行command2
 例如：
 comet month_end.txt || exit
 
-##使用()和{}将命令结合在一起
+## 使用()和{}将命令结合在一起
 命令格式：
 (command1;command2;command3;...)
 {command1;command2;command3;...}
 
-#grep家族
-##grep
+# grep家族
+## grep
 命令格式：grep [-options] expression files
 
 grep选项：
@@ -206,12 +206,12 @@ grep选项：
 ```bash
 grep -P '^\d{3}\s[sS]ep' -n data.f backup.f
 ```
-#登录环境
+# 登录环境
 
 用户登录成功后，系统执行两个环境设置文件，第一个是/etc/profile，第二个是.profile，位于用户根目录下
 
-#环境和shell变量
-##本地变量
+# 环境和shell变量
+## 本地变量
 本地变量在用户现在的shell生命期的脚本中使用。如果在shell中启动另一个进程或者退出，该变量就无效。
 variable-name=value
 {variable-name=value}
@@ -248,7 +248,7 @@ variable-name=value
 readonly variable-name
 查看所有只读变量：
 readonly
-##环境变量
+## 环境变量
 设置环境变量：
 VARIABLE-NAME=VALUE; export VARIABLE-NAME
 或
@@ -262,7 +262,7 @@ set -a
 PATH=$PATH:$HOME/bin
 EDITOR=vim
 ```
-##位置参数变量
+## 位置参数变量
 ```bash
 dyllanluo@dyllanluo-PC:~/testshell$ cat param
 echo "This is the 0 parameter: $0"
@@ -302,8 +302,8 @@ Did my script go with any errors: 0
 ```
 $?表示刚执行的脚本返回值
 
-#引号
-##单双引号
+# 引号
+## 单双引号
 双引号中的特殊字符有：$, `, \
 
 ```bash
@@ -313,14 +313,14 @@ dyllanluo@dyllanluo-PC:~/testshell$ echo "$LOL"
 dyllanluo@dyllanluo-PC:~/testshell$ echo '$LOL'
 $LOL
 ```
-##反引号
+## 反引号
 反引号中的内容会被当作bash执行
 ```bash
 dyllanluo@dyllanluo-PC:~/testshell$ echo `date`
 2017年 11月 01日 星期三 20:42:46 CST
 ```
-#基础shell编程
-##条件测试
+# 基础shell编程
+## 条件测试
 文件测试状态
 -d	目录
 -f	正规文件
@@ -406,8 +406,8 @@ dyllanluo@dyllanluo-PC:~$ expr $value + 0 > /dev/null 2>&1
 dyllanluo@dyllanluo-PC:~$ echo $?
 2
 ```
-#控制流结构
-##退出状态
+# 控制流结构
+## 退出状态
 ```bash
 dyllanluo@dyllanluo-PC:~/testshell$ cat exitcode
 echo "this is test"
@@ -425,7 +425,7 @@ this is test
 dyllanluo@dyllanluo-PC:~/testshell$ echo $?
 3
 ```
-##控制结构
+## 控制结构
 IF:
 ```bash
 if condition1
@@ -523,7 +523,7 @@ dyllanluo@dyllanluo-PC:~/testshell$ ./whileread
 216 sep 3ZL1998 USP 86.00 KVM9E 234
 ```
 break和continue都支持
-#shell函数
+# shell函数
 函数定义：
 ```bash
 [function] functionName () {
@@ -561,8 +561,8 @@ variable_name=function_name
 此处为<点><空格><斜线><文件名> (定位文件不仅限于定位function文件，也可以配置全局变量，在我看来有export的功能)
 使用set命令确认函数是否被载入到shell中
 删除函数：unset function_name
-#向脚本传递参数
-##shift的使用
+# 向脚本传递参数
+## shift的使用
 ```bash
 dyllanluo@dyllanluo-PC:~/testshell$ cat opt
 loop=0
@@ -576,7 +576,7 @@ file1
 file2
 file3
 ```
-##使用getopts
+## 使用getopts
 ```bash
 dyllanluo@dyllanluo-PC:~/testshell$ cat getopt1 
 while getopts :ahfg:vc: OPTION
@@ -602,4 +602,4 @@ SET HELP
 SET COPIES is 3
 SET GO is file
 ```
-#创建屏幕输出
+# 创建屏幕输出
