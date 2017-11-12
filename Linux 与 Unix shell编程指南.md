@@ -603,3 +603,82 @@ SET COPIES is 3
 SET GO is file
 ```
 # 创建屏幕输出
+常用字符串
+blink		闪烁模式
+bold		粗体
+civis		隐藏光标
+clear		清屏
+cnorm		不隐藏光标
+cup			移动光标到屏幕位置
+el			清除到行尾
+ell			清除到行首
+smso		启动突出模式
+rmso		停止突出模式
+smul		开始下划线模式
+rmul		结束下划线模式
+sc			保存当前光标位置
+rc			恢复光标到最后保存位置
+sgr0		正常屏幕
+rev			逆转视图
+数字输出
+cols		列数目
+it			tab设置宽度
+lines		屏幕行数
+布尔输出
+chts		光标不可见
+hs			具有状态行
+
+
+![](https://raw.githubusercontent.com/DyllanReview/BookReview/master/image/LinuxANDUnixShellProgrammingShell/tput2.png)
+
+# 关于<<
+当shell看到<<的时候， 它就知道下一个词是一个分解符。在该分解符以后的内容都被当作输入，直到shell又看到该分解符。这个分解符可以是你所定义的任何字符串。
+
+# shell工具
+
+date命令格式：
+date option + %format
+例如：date +%Y/%M/%d
+
+## 信号
+发送信号可以使用如下格式：
+kill [-signal no:| signal name] processID
+
+
+| signal no | signal name | meaning |
+| 1 | SIGHUP | 挂起或父进程被杀死 |
+| 2 | SIGINT | 来自键盘的中断信号，通常是<CTRL-C> |
+| 3 | SIGQUIT | 从键盘退出 |
+| 9 | SIGKILL | 无条件终止 |
+| 11 | SIGSEGV | 段冲突 |
+| 15 | SIGTERM | 软件终止（缺省杀进程信号） |
+在脚本中可以使用trap捕捉信号，格式为：
+trap name signal(s)
+其中name是捕捉到信号以后所采取的一系列操作。实际生活中，name一般是一个专门用来处理捕捉信号的函数。name需要用双引号（或单引号）引起来。
+
+例如
+trap "" 2 3 			#忽略信号2和3,用户本能终止该脚本
+trap "commands" 2 3		#执行commands如果捕捉到信号2或3
+trap 2 3				#复位信号2和3,用户可以终止该脚本
+
+eval命令
+eval “string” 意思是把string当命令执行
+
+logger命令
+logger命令格式：
+logger -p -I message
+-p为优先级
+-I后面为发送消息的进程号
+
+# 例子
+pingall:
+```bash
+cat /etc/hosts| grep -P '^[^#]' | while read LINE
+do
+	ADDR=`awk '{print $1}'`
+	for MACHINE in $ADDR
+	do
+		ping -s -cl $MACHINE
+	done
+done
+```
