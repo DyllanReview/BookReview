@@ -682,3 +682,41 @@ do
 	done
 done
 ```
+
+# 常用命令
+basename
+cat
+compress options files
+压缩或解压文件
+cp options file1 file2
+diff options file1 file2
+dircmp
+du options directory
+-a: 显示每个文件的大小，不仅是整个目录所占用的空间
+-s: 只显示总计
+file filename
+fuser options file
+-k: 杀死所有访问该文件或文件系统的进程
+-u: 显示访问该文件或文件系统的所有进程
+head -number files
+logname
+mkdir
+more
+nl -options file
+printf format arguments
+pwd
+rm options files
+rmdir options directory
+script option file
+shutdown
+sleep
+strings filename
+touch
+tty
+uname
+wait
+uncompress
+wait
+wc options files
+whereis command_name
+who
